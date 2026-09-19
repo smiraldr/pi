@@ -743,7 +743,7 @@ describe("default model selection", () => {
 	});
 
 	test("ionet default tracks current model", () => {
-		expect(defaultModelPerProvider["ionet"]).toBe("openai/gpt-oss-20b");
+		expect(defaultModelPerProvider.ionet).toBe("openai/gpt-oss-20b");
 	});
 
 	test("findInitialModel accepts explicit provider custom model ids", async () => {

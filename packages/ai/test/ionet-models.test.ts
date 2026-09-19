@@ -107,13 +107,12 @@ describe("IO Intelligence models", () => {
 			},
 		).result();
 
-		const params = payload as Record<string, any>;
-		expect(params.model).toBe("openai/gpt-oss-20b");
-		expect(params.stream).toBe(true);
-		expect(params.messages[0].role).toBe("system");
-		expect(params).not.toHaveProperty("store");
-		expect(params).not.toHaveProperty("reasoning_effort");
-		expect(params).not.toHaveProperty("stream_options");
-		expect(params.tools[0].function).not.toHaveProperty("strict");
+		expect(payload).toHaveProperty("model", "openai/gpt-oss-20b");
+		expect(payload).toHaveProperty("stream", true);
+		expect(payload).toHaveProperty("messages.0.role", "system");
+		expect(payload).not.toHaveProperty("store");
+		expect(payload).not.toHaveProperty("reasoning_effort");
+		expect(payload).not.toHaveProperty("stream_options");
+		expect(payload).not.toHaveProperty("tools.0.function.strict");
 	});
 });

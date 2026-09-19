@@ -406,8 +406,8 @@ describe("Tool Results with Images", () => {
 		});
 	});
 
-	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider (Qwen/Qwen2.5-VL-32B-Instruct)", () => {
-		const llm = getModel("ionet", "Qwen/Qwen2.5-VL-32B-Instruct");
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider (Llama 4 Maverick FP8)", () => {
+		const llm = getModel("ionet", "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8");
 
 		it("should handle tool result with only image", { retry: 3, timeout: 30000 }, async () => {
 			await handleToolWithImageResult(llm);

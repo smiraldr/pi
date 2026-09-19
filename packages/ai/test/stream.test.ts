@@ -1224,9 +1224,6 @@ describe("Generate E2E Tests", () => {
 
 	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider (GPT-OSS 20B)", () => {
 		const llm = getModel("ionet", "openai/gpt-oss-20b");
-		const thinkingOptions = {
-			thinkingEnabled: true,
-		} satisfies StreamOptionsWithExtras;
 
 		it("should complete basic text generation", { retry: 3 }, async () => {
 			await basicTextGeneration(llm);
@@ -1239,6 +1236,13 @@ describe("Generate E2E Tests", () => {
 		it("should handle streaming", { retry: 3 }, async () => {
 			await handleStreaming(llm);
 		});
+	});
+
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider (DeepSeek R1 0528)", () => {
+		const llm = getModel("ionet", "deepseek-ai/DeepSeek-R1-0528");
+		const thinkingOptions = {
+			thinkingEnabled: true,
+		} satisfies StreamOptionsWithExtras;
 
 		it("should handle thinking mode", { retry: 3 }, async () => {
 			await handleThinking(llm, thinkingOptions);
