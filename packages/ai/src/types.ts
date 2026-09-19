@@ -58,6 +58,7 @@ export type KnownProvider =
 	| "moonshotai"
 	| "moonshotai-cn"
 	| "huggingface"
+	| "ionet"
 	| "fireworks"
 	| "together"
 	| "baseten"

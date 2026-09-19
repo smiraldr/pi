@@ -270,6 +270,14 @@ describe("Tool Call Without Result Tests", () => {
 		});
 	});
 
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider", () => {
+		const model = getModel("ionet", "openai/gpt-oss-20b");
+
+		it("should filter out tool calls without corresponding tool results", { retry: 3, timeout: 30000 }, async () => {
+			await testToolCallWithoutResult(model);
+		});
+	});
+
 	describe.skipIf(!process.env.QWEN_TOKEN_PLAN_API_KEY)("Qwen Token Plan Individual Provider", () => {
 		const model = getModel("qwen-token-plan-individual", "qwen3.8-max");
 

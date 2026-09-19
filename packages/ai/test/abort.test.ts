@@ -273,6 +273,18 @@ describe("AI Providers Abort Tests", () => {
 		});
 	});
 
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider Abort", () => {
+		const llm = getModel("ionet", "openai/gpt-oss-20b");
+
+		it("should abort mid-stream", { retry: 3 }, async () => {
+			await testAbortSignal(llm);
+		});
+
+		it("should handle immediate abort", { retry: 3 }, async () => {
+			await testImmediateAbort(llm);
+		});
+	});
+
 	describe.skipIf(!process.env.QWEN_TOKEN_PLAN_API_KEY)("Qwen Token Plan Individual Provider Abort", () => {
 		const llm = getModel("qwen-token-plan-individual", "qwen3.8-max");
 

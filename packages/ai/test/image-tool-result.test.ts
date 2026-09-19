@@ -406,6 +406,18 @@ describe("Tool Results with Images", () => {
 		});
 	});
 
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider (Qwen/Qwen2.5-VL-32B-Instruct)", () => {
+		const llm = getModel("ionet", "Qwen/Qwen2.5-VL-32B-Instruct");
+
+		it("should handle tool result with only image", { retry: 3, timeout: 30000 }, async () => {
+			await handleToolWithImageResult(llm);
+		});
+
+		it("should handle tool result with text and image", { retry: 3, timeout: 30000 }, async () => {
+			await handleToolWithTextAndImageResult(llm);
+		});
+	});
+
 	describe.skipIf(!process.env.QWEN_TOKEN_PLAN_API_KEY)("Qwen Token Plan Individual Provider (qwen3.8-max)", () => {
 		const llm = getModel("qwen-token-plan-individual", "qwen3.8-max");
 

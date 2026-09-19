@@ -292,6 +292,14 @@ describe("Token Statistics on Abort", () => {
 		});
 	});
 
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence Provider", () => {
+		const llm = getModel("ionet", "openai/gpt-oss-20b");
+
+		it("should include token stats when aborted mid-stream", { retry: 3, timeout: 30000 }, async () => {
+			await testTokensOnAbort(llm);
+		});
+	});
+
 	describe.skipIf(!process.env.QWEN_TOKEN_PLAN_API_KEY)("Qwen Token Plan Individual Provider", () => {
 		const llm = getModel("qwen-token-plan-individual", "qwen3.8-max");
 

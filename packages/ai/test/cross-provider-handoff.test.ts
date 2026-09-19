@@ -132,6 +132,10 @@ const PROVIDER_MODEL_PAIRS: ProviderModelPair[] = [
 	{ provider: "xiaomi-token-plan-cn", model: "mimo-v2.5-pro", label: "xiaomi-token-plan-cn-mimo-v2.5-pro" },
 	{ provider: "xiaomi-token-plan-ams", model: "mimo-v2.5-pro", label: "xiaomi-token-plan-ams-mimo-v2.5-pro" },
 	{ provider: "xiaomi-token-plan-sgp", model: "mimo-v2.5-pro", label: "xiaomi-token-plan-sgp-mimo-v2.5-pro" },
+	// IO Intelligence
+	{ provider: "ionet", model: "openai/gpt-oss-20b", label: "ionet-openai/gpt-oss-20b" },
+	{ provider: "ionet", model: "deepseek-ai/DeepSeek-R1-0528", label: "ionet-deepseek-ai/DeepSeek-R1-0528" },
+	{ provider: "ionet", model: "meta-llama/Llama-3.3-70B-Instruct", label: "ionet-meta-llama/Llama-3.3-70B-Instruct" },
 	// Qwen Token Plan
 	{ provider: "qwen-token-plan", model: "qwen3.7-max", label: "qwen-token-plan-qwen3.7-max" },
 	{ provider: "qwen-token-plan-cn", model: "qwen3.7-max", label: "qwen-token-plan-cn-qwen3.7-max" },

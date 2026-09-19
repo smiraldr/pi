@@ -237,6 +237,15 @@ const NVIDIA_OPENAI_COMPAT: OpenAICompletionsCompat = {
 	supportsStrictMode: false,
 	supportsLongCacheRetention: false,
 };
+const IONET_COMPAT: OpenAICompletionsCompat = {
+	supportsStore: false,
+	supportsDeveloperRole: false,
+	supportsReasoningEffort: false,
+	supportsUsageInStreaming: false,
+	maxTokensField: "max_completion_tokens",
+	supportsStrictMode: false,
+	supportsLongCacheRetention: false,
+};
 const NVIDIA_NIM_UNSUPPORTED_MODELS = new Set([
 	"abacusai/dracarys-llama-3.1-70b-instruct",
 	"bytedance/seed-oss-36b-instruct",
@@ -1788,6 +1797,34 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					maxTokens: m.limit?.output || 4096,
 				});
 				recordModelsDevReasoningOptions("groq", modelId, m);
+			}
+		}
+
+		// Process io.net Intelligence models
+		if (data["io-net"]?.models) {
+			for (const [modelId, model] of Object.entries(data["io-net"].models)) {
+				const m = model as ModelsDevModel;
+				if (m.tool_call !== true) continue;
+
+				models.push({
+					id: modelId,
+					name: m.name || modelId,
+					api: "openai-completions",
+					provider: "ionet",
+					baseUrl: "https://api.intelligence.io.solutions/api/v1",
+					compat: IONET_COMPAT,
+					reasoning: m.reasoning === true,
+					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					cost: {
+						input: m.cost?.input || 0,
+						output: m.cost?.output || 0,
+						cacheRead: m.cost?.cache_read || 0,
+						cacheWrite: m.cost?.cache_write || 0,
+					},
+					contextWindow: m.limit?.context || 4096,
+					maxTokens: m.limit?.output || 4096,
+				});
+				recordModelsDevReasoningOptions("ionet", modelId, m);
 			}
 		}
 

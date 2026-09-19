@@ -43,6 +43,7 @@ export const defaultModelPerProvider: Record<KnownProvider, string> = {
 	moonshotai: "kimi-k2.6",
 	"moonshotai-cn": "kimi-k2.6",
 	huggingface: "moonshotai/Kimi-K2.6",
+	ionet: "openai/gpt-oss-20b",
 	fireworks: "accounts/fireworks/models/kimi-k2p6",
 	together: "moonshotai/Kimi-K2.6",
 	baseten: "zai-org/GLM-5.2",

@@ -606,6 +606,31 @@ describe("totalTokens field", () => {
 	});
 
 	// =========================================================================
+	// IO Intelligence
+	// =========================================================================
+
+	describe.skipIf(!process.env.IONET_API_KEY)("IO Intelligence", () => {
+		it(
+			"openai/gpt-oss-20b - should return totalTokens equal to sum of components",
+			{ retry: 3, timeout: 60000 },
+			async () => {
+				const llm = getModel("ionet", "openai/gpt-oss-20b");
+
+				console.log(`\nIO Intelligence / ${llm.id}:`);
+				const { first, second } = await testTotalTokensWithCache(llm, {
+					apiKey: process.env.IONET_API_KEY,
+				});
+
+				logUsage("First request", first);
+				logUsage("Second request", second);
+
+				assertTotalTokensEqualsComponents(first);
+				assertTotalTokensEqualsComponents(second);
+			},
+		);
+	});
+
+	// =========================================================================
 	// Qwen Token Plan Individual
 	// =========================================================================
 
