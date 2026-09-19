@@ -101,6 +101,7 @@ describe("IO Intelligence models", () => {
 			},
 			{
 				apiKey: "test",
+				maxTokens: 512,
 				onPayload: (params: unknown) => {
 					payload = params;
 				},
@@ -110,6 +111,8 @@ describe("IO Intelligence models", () => {
 		expect(payload).toHaveProperty("model", "openai/gpt-oss-20b");
 		expect(payload).toHaveProperty("stream", true);
 		expect(payload).toHaveProperty("messages.0.role", "system");
+		expect(payload).toHaveProperty("max_completion_tokens", 512);
+		expect(payload).not.toHaveProperty("max_tokens");
 		expect(payload).not.toHaveProperty("store");
 		expect(payload).not.toHaveProperty("reasoning_effort");
 		expect(payload).not.toHaveProperty("stream_options");
